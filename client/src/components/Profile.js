@@ -1,6 +1,5 @@
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 import ProfileService from "../Services/ProfileService";
-import AuthService from "../Services/AuthService";
 // import {AuthContext} from '../context/AuthContext';
 // import ProfileItem from './ProfileItem';
 import Message from "./Message";

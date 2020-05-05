@@ -1,11 +1,11 @@
 import React, { useState, useEffect } from "react";
 import ProfileService from "../Services/ProfileService";
 import FormService from "../Services/FormService";
-import { getHistory, postHistory } from "../Services/HistoryService";
+import { postHistory } from "../Services/HistoryService";
 import { Button, Form, FormGroup, Label, Input } from "reactstrap";
 import "../App.css";
 
-const FormQuote = (props) => {
+const FormQuote = () => {
   const initialFormState = {
     profileID: "",
     address: "",
@@ -21,7 +21,7 @@ const FormQuote = (props) => {
     rate_for_history: 0,
   });
 
-  const [h, setHistory] = useState({
+  const [history, setHistory] = useState({
     gallons: 0,
     address: "",
     date: "",
@@ -30,7 +30,6 @@ const FormQuote = (props) => {
     profileID: 0,
   });
 
-  const [histArray, sethistArray] = useState([]); //array
   const [message, setMessage] = useState(null);
 
   useEffect(() => {
@@ -43,7 +42,7 @@ const FormQuote = (props) => {
           profileID: data.profile._id,
         });
         setHistory({
-          ...h,
+          ...history,
           address: `${data.profile.address}, ${data.profile.city} ${data.profile.state} ${data.profile.zipcode}`,
           profileID: data.profile._id,
         });
@@ -63,18 +62,13 @@ const FormQuote = (props) => {
     });
   }, []);
 
-  useEffect(() => {
-    getHistory().then((data) => {
-      sethistArray(data.histArray);
-    });
-  }, []);
-
   const onChange = (e) => {
     e.preventDefault();
     setForm({ ...form, [e.target.name]: e.target.value });
 
-    setHistory({ ...h, [e.target.name]: e.target.value });
+    setHistory({ ...history, [e.target.name]: e.target.value });
   };
+
   const onSubmit = (e) => {
     e.preventDefault();
     FormService.postForm(form).then((data) => {
@@ -86,14 +80,13 @@ const FormQuote = (props) => {
         setMessage(message);
       }
     });
-    postHistory(h).then((data) => {});
+    postHistory(history).then((data) => {});
   };
 
   const [isError, setError] = useState(false);
-
   const [dateError, setDateError] = useState(false);
 
-  const priceModule = (e) => {
+  const priceModule = () => {
     if (form.gallons <= 0) {
       setError(true);
     } else {
@@ -165,9 +158,8 @@ const FormQuote = (props) => {
       suggested = (Math.round(suggested * 100) / 100).toFixed(2);
       total = (Math.round(total * 100) / 100).toFixed(2);
     }
-
     setForm({ ...form, suggested: suggested, total: total });
-    setHistory({ ...h, suggested: suggested, total: total });
+    setHistory({ ...history, suggested: suggested, total: total });
     console.log("final values: ", suggested, total);
   };
 
