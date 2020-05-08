@@ -1,7 +1,7 @@
 # FuelRate Predictor
 
-> Application built using the MERN stack for my Software Design Class.
-> Fule rate calculation based on a number of factors:
+###### Application built using the MERN stack for my Software Design Class.
+###### Fule rate calculation based on a number of factors:
 
 - Location
 - Gallons Requested
@@ -13,8 +13,8 @@
 
 #### Dependencies
 
-> npm i -D
+###### npm i -D
 
 #### Run
 
-> npm run dev
+###### npm run dev
