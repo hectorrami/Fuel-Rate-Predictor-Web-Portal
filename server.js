@@ -22,8 +22,7 @@ app.use(cookieParser());
 
 app.get("/", (req, res) => res.send("API Running"));
 
-const uri =
-  "mongodb+srv://MubashirKhan:softwaredesign2020@sdcluster-o0sio.gcp.mongodb.net/test?retryWrites=true&w=majority";
+const uri = 
 
 mongoose
   .connect(uri, {
