@@ -11,7 +11,7 @@
 
 # Installation
 
-#### Dependencies
+#### Install Dependencies
 
 ###### npm i -D
 
